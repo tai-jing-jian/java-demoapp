@@ -13,8 +13,9 @@ COPY .mvn ./.mvn
 COPY mvnw ./mvnw
 COPY pom.xml .
 COPY src ./src
+COPY build/settings.xml ./settings.xml
 
-RUN ./mvnw -ntp clean package -Dapp.version=$APP_VERSION -DskipTests -Dmaven.test.skip=true -Dcheckstyle.skip=true
+RUN ./mvnw -ntp clean package -s settings.xml -Dapp.version=$APP_VERSION -DskipTests -Dmaven.test.skip=true -Dcheckstyle.skip=true
 RUN mv target/java-demoapp-${APP_VERSION}.jar target/java-demoapp.jar
 
 #
